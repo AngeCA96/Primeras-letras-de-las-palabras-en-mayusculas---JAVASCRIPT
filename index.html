@@ -1,0 +1,36 @@
+<!doctype html>
+  <html>
+    <head>
+      <title>Inicio HTML</title>
+      <meta name="description" content="Our first page">
+      <meta name="keywords" content="html tutorial template">
+    </head>
+  <body>
+    <input type="text" id="ingreso" placeholder="Escribí texto para llevar a mayúsculas la primera letra de cada palabra" style="width:100%">
+    <pre id="resultado">
+    
+    <script>
+      function titleCase(texto) {
+        const re = /(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])(?:([a-záéíóúüñ])|([A-ZÁÉÍÓÚÜÑ]))|([A-ZÁÉÍÓÚÜÑ]+)/gu;
+        return texto.replace(re,
+            (m, caracterPrevio, minuscInicial, mayuscInicial, mayuscIntermedias) => {
+                const locale = ['es', 'gl', 'ca', 'pt', 'en'];
+                  if (mayuscIntermedias)
+                    return mayuscIntermedias.toLocaleLowerCase(locale);
+                    return caracterPrevio
+                     + (minuscInicial ? minuscInicial.toLocaleUpperCase(locale) : mayuscInicial);
+              }
+          );
+       }
+
+    //Evento para mostrar el resultado cada vez que se ingresa un caracter
+    document.getElementById('ingreso')
+        .addEventListener('input',
+            event => {
+                document.getElementById('ingreso')
+                    .value = titleCase(event.target.value);
+            }
+        );
+    </script>
+  </body>
+  </html>
